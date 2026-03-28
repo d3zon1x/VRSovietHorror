@@ -21,6 +21,6 @@ public class KeyPickup : MonoBehaviour
             Debug.LogError("GameProgress.Instance is NULL");
         }
 
-        transform.root.gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 }
