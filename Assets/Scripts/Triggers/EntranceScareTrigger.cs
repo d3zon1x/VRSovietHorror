@@ -8,6 +8,7 @@ public class EntranceScareTrigger : MonoBehaviour
     public AudioSource flickerAudio;
     public AudioSource PowerOffAudio;
     public AudioSource DemonicRoaring;
+    public SimpleDoor entranceDoor;
 
 
     public float creatureVisibleTime = 1.5f;
@@ -37,6 +38,10 @@ public class EntranceScareTrigger : MonoBehaviour
 
     private IEnumerator ScareSequence()
     {
+        if (entranceDoor != null)
+            entranceDoor.ForceCloseAndLock();
+
+
         if (flickerAudio != null)
             flickerAudio.Play();
 

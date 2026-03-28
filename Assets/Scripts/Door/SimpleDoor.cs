@@ -6,14 +6,22 @@ public class SimpleDoor : MonoBehaviour
 {
     public float openAngle = 90f;
     public float openSpeed = 2f;
+    public float closeSpeed = 8f;
     public float closeDelay = 4f;
     public bool openPositive = true;
+
+    public AudioSource audioSource;
+    public AudioClip openSound;
+    public AudioClip closeSound;
 
     private Quaternion closedRotation;
     private Quaternion openRotation;
 
     private Coroutine moveRoutine;
     private Coroutine closeRoutine;
+
+    private bool isOpen = false;
+    private bool isLockedForever = false;
 
     void Start()
     {
@@ -33,13 +41,20 @@ public class SimpleDoor : MonoBehaviour
 
     public void OpenDoor()
     {
+        if (isOpen) return;
+        if (isLockedForever) return;
+
+        isOpen = true;
+
         if (moveRoutine != null)
             StopCoroutine(moveRoutine);
 
         if (closeRoutine != null)
             StopCoroutine(closeRoutine);
 
-        moveRoutine = StartCoroutine(RotateDoor(openRotation));
+        PlaySound(openSound);
+
+        moveRoutine = StartCoroutine(RotateDoor(openRotation, openSpeed));
         closeRoutine = StartCoroutine(CloseAfterDelay());
     }
 
@@ -50,22 +65,51 @@ public class SimpleDoor : MonoBehaviour
         if (moveRoutine != null)
             StopCoroutine(moveRoutine);
 
-        moveRoutine = StartCoroutine(RotateDoor(closedRotation));
+        PlaySound(closeSound);
+
+        moveRoutine = StartCoroutine(RotateDoor(closedRotation, closeSpeed));
+        isOpen = false;
     }
 
-    private IEnumerator RotateDoor(Quaternion targetRotation)
+    public void ForceCloseAndLock()
+    {
+        isLockedForever = true;
+        isOpen = false;
+
+        if (moveRoutine != null)
+            StopCoroutine(moveRoutine);
+
+        if (closeRoutine != null)
+            StopCoroutine(closeRoutine);
+
+        PlaySound(closeSound);
+
+        moveRoutine = StartCoroutine(RotateDoor(closedRotation, closeSpeed));
+    }
+
+    private IEnumerator RotateDoor(Quaternion targetRotation, float speed)
     {
         while (Quaternion.Angle(transform.localRotation, targetRotation) > 0.5f)
         {
             transform.localRotation = Quaternion.Slerp(
                 transform.localRotation,
                 targetRotation,
-                Time.deltaTime * openSpeed
+                Time.deltaTime * speed
             );
 
             yield return null;
         }
 
         transform.localRotation = targetRotation;
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.pitch = Random.Range(0.97f, 1.03f);
+            audioSource.PlayOneShot(clip);
+            audioSource.pitch = 1f;
+        }
     }
 }

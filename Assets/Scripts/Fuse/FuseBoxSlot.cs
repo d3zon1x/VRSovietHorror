@@ -5,6 +5,8 @@ public class FuseBoxSlot : MonoBehaviour
 {
     public GameObject fuseInsertedVisual;
     public Light[] lightsToTurnOn;
+    public float[] targetIntensities;
+    public AudioSource turnOnElectricity;
 
     private bool isActivated = false;
 
@@ -36,11 +38,19 @@ public class FuseBoxSlot : MonoBehaviour
             fuseInsertedVisual.SetActive(true);
         }
 
-        foreach (Light lightObj in lightsToTurnOn)
+        if(turnOnElectricity != null)
+            turnOnElectricity.Play();
+
+        for (int i = 0; i < lightsToTurnOn.Length; i++)
         {
-            if (lightObj != null)
+            if (lightsToTurnOn[i] != null)
             {
-                lightObj.enabled = true;
+                lightsToTurnOn[i].enabled = true;
+
+                if (targetIntensities != null && i < targetIntensities.Length)
+                {
+                    lightsToTurnOn[i].intensity = targetIntensities[i];
+                }
             }
         }
 
