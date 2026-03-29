@@ -7,6 +7,8 @@
 UserSettings/
 MemoryCaptures/
 Recordings/
+Voltage_Test1_BackUpThisFolder_ButDontShipItWithYourGame/
+VR_Horror_uni_BurstDebugInformation_DoNotShip/
 
 # macOS
 .DS_Store
@@ -21,3 +23,8 @@ Recordings/
 *.booproj
 *.svd
 *.pdb
+*.app
+
+*.app
+*_BackUpThisFolder_ButDontShipItWithYourGame/
+*_BurstDebugInformation_DoNotShip/
