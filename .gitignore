@@ -24,7 +24,9 @@ VR_Horror_uni_BurstDebugInformation_DoNotShip/
 *.svd
 *.pdb
 *.app
+*.apk
 
 *.app
 *_BackUpThisFolder_ButDontShipItWithYourGame/
 *_BurstDebugInformation_DoNotShip/
+VoltageHorror_BackUpThisFolder_ButDontShipItWithYourGame/*.apk

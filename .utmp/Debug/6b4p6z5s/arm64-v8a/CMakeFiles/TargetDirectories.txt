@@ -1,0 +1,5 @@
+/Users/rostyslav/Desktop/Project VR/VRSovietHorror/.utmp/Debug/6b4p6z5s/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/rostyslav/Desktop/Project VR/VRSovietHorror/.utmp/Debug/6b4p6z5s/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Users/rostyslav/Desktop/Project VR/VRSovietHorror/.utmp/Debug/6b4p6z5s/arm64-v8a/GameActivity/CMakeFiles/game.dir
+/Users/rostyslav/Desktop/Project VR/VRSovietHorror/.utmp/Debug/6b4p6z5s/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+/Users/rostyslav/Desktop/Project VR/VRSovietHorror/.utmp/Debug/6b4p6z5s/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
