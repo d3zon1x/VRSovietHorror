@@ -15,6 +15,9 @@ public class KeyPickup : MonoBehaviour
         {
             GameProgress.Instance.hasHallKey = true;
             Debug.Log("Hall key picked up");
+
+            if (VoiceManager.Instance != null)
+                VoiceManager.Instance.PlayFindingKey();
         }
         else
         {

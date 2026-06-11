@@ -8,6 +8,11 @@ public class FuseBoxSlot : MonoBehaviour
     public float[] targetIntensities;
     public AudioSource turnOnElectricity;
 
+    [Header("Final Setup")]
+    public FinalDoorHandleTouch finalDoorHandleTouch;
+    public FinalDoorCloser finalDoorCloser;
+    public float finalDoorCloseDelay = 1f;
+
     private bool isActivated = false;
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +43,7 @@ public class FuseBoxSlot : MonoBehaviour
             fuseInsertedVisual.SetActive(true);
         }
 
-        if(turnOnElectricity != null)
+        if (turnOnElectricity != null)
             turnOnElectricity.Play();
 
         for (int i = 0; i < lightsToTurnOn.Length; i++)
@@ -54,6 +59,22 @@ public class FuseBoxSlot : MonoBehaviour
             }
         }
 
+        if (VoiceManager.Instance != null)
+            VoiceManager.Instance.PlayLightsOn();
+
+        Invoke(nameof(PrepareFinalDoor), finalDoorCloseDelay);
+
         Debug.Log("Fuse inserted, lights turned on");
+    }
+
+    private void PrepareFinalDoor()
+    {
+        if (finalDoorCloser != null)
+            finalDoorCloser.CloseDoorOnly();
+
+        if (finalDoorHandleTouch != null)
+            finalDoorHandleTouch.EnableFinal();
+
+        Debug.Log("Final door prepared");
     }
 }

@@ -71,6 +71,11 @@ public class EntranceScareTrigger : MonoBehaviour
 
         if (PowerOffAudio != null)
             PowerOffAudio.Play();
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (VoiceManager.Instance != null)
+            VoiceManager.Instance.PlayFirstScreamer();
      
     }
 
